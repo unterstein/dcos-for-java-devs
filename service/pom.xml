@@ -12,7 +12,8 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.3.3.RELEASE</version>
     </parent>
-    <artifactId>chuck-java</artifactId>
+    <groupId>com.mesosphere.dcosforjavadevs</groupId>
+    <artifactId>service</artifactId>
     <name>chuck-java</name>
     <description>Chuck norris joke service</description>
     <version>1.0-SNAPSHOT</version>
