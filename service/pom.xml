@@ -14,7 +14,7 @@
     </parent>
     <groupId>com.mesosphere.dcosforjavadevs</groupId>
     <artifactId>service</artifactId>
-    <name>chuck-java</name>
+    <name>service</name>
     <description>Chuck norris joke service</description>
     <version>1.0-SNAPSHOT</version>
     <dependencies>

@@ -1,0 +1,16 @@
+version: '2'
+services:
+
+  service:
+    image: dcos-for-java-devs/service
+    ports:
+      - "18080:8080"
+    environment:
+      - MYSQL_URL=http://elasticsearch:9200
+    depends_on:
+      - MYSQL_URL="jdbc:mysql://database:13306/chuck?user=chuck&password=norris"
+
+  database:
+    image: dcos-for-java-devs/database
+    ports:
+      - "13306:3306"
