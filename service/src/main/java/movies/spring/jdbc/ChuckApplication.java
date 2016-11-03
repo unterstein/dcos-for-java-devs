@@ -25,9 +25,14 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     private final static List<String> acceptedLanguages = Arrays.asList("de", "en");
 
     private final String nodeId;
+    private final String version;
 
     public ChuckApplication() {
         nodeId = UUID.randomUUID().toString();
+        String tmpVersion = System.getenv("SERVICE_VERSION");
+        if (tmpVersion == null)
+            tmpVersion = System.getProperty("SERVICE_VERSION", "1");
+        version = tmpVersion;
     }
 
     @Autowired
@@ -43,6 +48,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
             result.put("joke", query.get("joke").toString());
             result.put("locale", locale);
             result.put("nodeId", nodeId);
+            result.put("version", version);
             try {
                 result.put("hostname", InetAddress.getLocalHost().getHostName());
             } catch (UnknownHostException e) {
@@ -50,6 +56,11 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
             }
         }
         return result;
+    }
+
+    @RequestMapping("/health")
+    public String healthy() {
+        return "healthy";
     }
 
     public static void main(String[] args) throws Exception {
