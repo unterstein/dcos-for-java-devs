@@ -46,7 +46,7 @@
             "maximumOverCapacity":0.15
          },
          "labels":{
-            "HAPROXY_0_VHOST":"junterste-publicsl-1qbckfbhw7y50-988569305.us-west-2.elb.amazonaws.com",
+            "HAPROXY_0_VHOST":"your.public.elb.amazonaws.com",
             "HAPROXY_GROUP":"external"
          }
       },
