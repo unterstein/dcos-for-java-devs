@@ -2,7 +2,7 @@ version: '2'
 services:
 
   service:
-    image: dcos-for-java-devs/service
+    image: unterstein/dcos-for-java-devs-service
     ports:
       - "18080:8080"
     depends_on:
@@ -12,6 +12,6 @@ services:
       - SERVICE_VERSION=2
 
   database:
-    image: dcos-for-java-devs/database
+    image: unterstein/dcos-for-java-devs-database
     ports:
       - "13306:3306"
