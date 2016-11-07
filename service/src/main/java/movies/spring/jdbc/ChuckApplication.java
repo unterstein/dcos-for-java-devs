@@ -9,6 +9,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -24,8 +25,17 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
 
     private final static List<String> acceptedLanguages = Arrays.asList("de", "en");
 
+    // stores the current nodeId of this service - current implemented as uuid
     private final String nodeId;
+
+    // stores the application version of this service
     private final String version;
+
+    // stores the host name on which this service runs
+    private final String hostName;
+
+    // stores the information if this service should be return healthy or unhealthy
+    private boolean healthy = true;
 
     public ChuckApplication() {
         nodeId = UUID.randomUUID().toString();
@@ -33,6 +43,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         if (tmpVersion == null)
             tmpVersion = System.getProperty("SERVICE_VERSION", "1");
         version = tmpVersion;
+        hostName = getHostName();
     }
 
     @Autowired
@@ -49,18 +60,24 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
             result.put("locale", locale);
             result.put("nodeId", nodeId);
             result.put("version", version);
-            try {
-                result.put("hostname", InetAddress.getLocalHost().getHostName());
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            }
+            result.put("hostname", hostName);
         }
         return result;
     }
 
     @RequestMapping("/health")
     public String healthy() {
-        return "healthy";
+        if (healthy) {
+            return "healthy";
+        } else {
+            throw new RuntimeException("meh!");
+        }
+    }
+
+    @RequestMapping(value = "/toggleHealth", method = RequestMethod.PUT)
+    public String toggleHealth() {
+        healthy = !healthy; // toggled value
+        return "toggled";
     }
 
     public static void main(String[] args) throws Exception {
@@ -75,4 +92,11 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         return new DriverManagerDataSource(MYSQL_URL);
     }
 
+    private String getHostName() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            return "unknown";
+        }
+    }
 }
