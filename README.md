@@ -47,3 +47,7 @@ To see the presentation, just open the pdf file in the presentation folder or go
 - Look what happens in Service UI, show AppDefinition, logging, ...
 - `dcos task log $taskId`
 - `dcos marathon app update chuck-jocke/service instances=20`
+- Go to service UI and change `"SERVICE_VERSION":"4"` and see rolling update
+- Toggle health check and see marathon will replace the task
+
+
