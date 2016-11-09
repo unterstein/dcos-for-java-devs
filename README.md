@@ -18,7 +18,7 @@ To see the presentation, just open the pdf file in the presentation folder or go
 # What is in this demo?
 - One java service, one mysql database
 - The java service depends on the database and consumes data
-- We will get nice juck norris jokes if everything is running ;-)
+- We will get nice chuck norris jokes if everything is running ;-)
 
 
 # Get this demo working locally
