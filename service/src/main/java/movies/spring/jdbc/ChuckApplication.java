@@ -49,19 +49,20 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     @Autowired
     JdbcTemplate template;
 
-    @RequestMapping
+    @RequestMapping("/")
     public Map<String, String> random() {
         Map<String, String> result = new HashMap<>();
         String locale = LocaleContextHolder.getLocale().getLanguage();
-        if (acceptedLanguages.contains(locale)) {
-            Map<String, Object> query = template.queryForMap("SELECT * FROM `jokes` WHERE lang=? ORDER BY RAND() LIMIT 0,1;", locale);
-
-            result.put("joke", query.get("joke").toString());
-            result.put("locale", locale);
-            result.put("nodeId", nodeId);
-            result.put("version", version);
-            result.put("hostname", hostName);
+        if (!acceptedLanguages.contains(locale)) {
+            locale = acceptedLanguages.get(0);
         }
+        Map<String, Object> query = template.queryForMap("SELECT * FROM `jokes` WHERE lang=? ORDER BY RAND() LIMIT 0,1;", locale);
+
+        result.put("joke", query.get("joke").toString());
+        result.put("locale", locale);
+        result.put("nodeId", nodeId);
+        result.put("version", version);
+        result.put("hostname", hostName);
         return result;
     }
 
