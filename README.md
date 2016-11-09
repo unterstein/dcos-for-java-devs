@@ -17,11 +17,11 @@ To see the presentation, just open the pdf file in the presentation folder or go
 
 # What is in this demo?
 - One java service, one mysql database
-- the java service depends on the database and consumes data
+- The java service depends on the database and consumes data
 - We will get nice juck norris jokes if everything is running ;-)
 
 
-# Get this demo working
+# Get this demo working locally
 - You need java, docker and docker-compose to be installed on your machine.
 - Go to sources and run this command
 
@@ -30,3 +30,20 @@ To see the presentation, just open the pdf file in the presentation folder or go
 ```
 
 - Point a browser of your choice to your docker ip on port ```18080``` for http to view REST API.
+
+# Get this demo working on DC/OS
+- You need a running DC/OS cluster to run this demo
+- You have multiple options to spin up a DC/OS cluster
+	- Go to https://dcos.io/ and to walk through the possibilities or browse the docs
+	- Go to https://github.com/dcos/dcos-vagrant if you want to play around on your local box
+
+
+# What was shown in demo #3
+- DC/OS Dashboard
+- DC/OS Universe
+- Simple sleep task in service UI
+- Show marathon-configuration.json
+- `dcos marathon group add marathon-configuration.json`
+- Look what happens in Service UI, show AppDefinition, logging, ...
+- `dcos task log $taskId`
+- `dcos marathon app update chuck-jocke/service instances=20`
