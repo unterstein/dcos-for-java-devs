@@ -31,8 +31,8 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     // stores the application version of this service
     private final String version;
 
-    // stores the host name on which this service runs
-    private final String hostName;
+    // stores the host address on which this service runs
+    private final String hostAddress;
 
     // stores the information if this service should be return healthy or unhealthy
     private boolean healthy = true;
@@ -43,14 +43,14 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         if (tmpVersion == null)
             tmpVersion = System.getProperty("SERVICE_VERSION", "1");
         version = tmpVersion;
-        hostName = getHostName();
+        hostAddress = getHostAddress();
     }
 
     @Autowired
     JdbcTemplate template;
 
     @RequestMapping("/")
-    public Map<String, String> random() {
+    public Map<String, String> randomJoke() {
         Map<String, String> result = new HashMap<>();
         String locale = LocaleContextHolder.getLocale().getLanguage();
         if (!acceptedLanguages.contains(locale)) {
@@ -62,7 +62,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         result.put("locale", locale);
         result.put("nodeId", nodeId);
         result.put("version", version);
-        result.put("hostname", hostName);
+        result.put("hostAddress", hostAddress);
         return result;
     }
 
@@ -75,10 +75,10 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         }
     }
 
-    @RequestMapping(value = "/toggleHealth", method = RequestMethod.PUT)
+    @RequestMapping(value = "/health", method = RequestMethod.PUT)
     public String toggleHealth() {
         healthy = !healthy; // toggled value
-        return "toggled";
+        return "toggled, now: " + healthy;
     }
 
     public static void main(String[] args) throws Exception {
@@ -93,9 +93,9 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         return new DriverManagerDataSource(MYSQL_URL);
     }
 
-    private String getHostName() {
+    private String getHostAddress() {
         try {
-            return InetAddress.getLocalHost().getHostName();
+            return InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
             return "unknown";
         }
