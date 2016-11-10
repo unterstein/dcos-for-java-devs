@@ -41,7 +41,7 @@ To see the presentation, just open the pdf file in the presentation folder or go
 # What was shown in demo #3
 - DC/OS Dashboard
 - DC/OS Universe
-- Simple sleep task in service UI
+- Simple sleep task in service UI, including constraints
 - Show marathon-configuration.json
 - `dcos marathon group add marathon-configuration.json`
 - Look what happens in Service UI, show AppDefinition, logging, ...

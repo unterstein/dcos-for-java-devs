@@ -70,7 +70,22 @@
                      }
                   }
                ]
-            }
+            },
+            "volumes": [
+               {
+                 "containerPath":"mysqldata",
+                 "mode":"RW",
+                 "persistent": {
+                   "type":"root",
+                   "size":1000
+                 }
+               },
+               {
+                 "containerPath": "/var/lib/mysql",
+                 "hostPath": "mysqldata",
+                 "mode": "RW"
+               }
+            ]
          },
          "healthChecks":[
             {
