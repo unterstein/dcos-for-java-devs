@@ -49,5 +49,6 @@ To see the presentation, just open the pdf file in the presentation folder or go
 - CLI: `dcos marathon app update chuck-jocke/service instances=20`
 - Service UI: Change `"SERVICE_VERSION":"4"` and see rolling update
 - Toggle health check `curl -XPUT your.public.elb.amazonaws.com/health and see marathon will replace the task
+- [Optional] Install zeppelin, import `zeppelin-analysis.json` notebook and see what happens :)
 
 
