@@ -40,14 +40,14 @@ To see the presentation, just open the pdf file in the presentation folder or go
 
 # What was shown in demo #3
 - DC/OS Dashboard
-- DC/OS Universe
-- Simple sleep task in service UI, including constraints
+- Service UI: Simple sleep task, including constraints
 - Show marathon-configuration.json
-- `dcos marathon group add marathon-configuration.json`
+- DC/OS Universe, install `marathon-lb`
+- CLI: `dcos marathon group add marathon-configuration.json`
 - Look what happens in Service UI, show AppDefinition, logging, ...
-- `dcos task log $taskId`
-- `dcos marathon app update chuck-jocke/service instances=20`
-- Go to service UI and change `"SERVICE_VERSION":"4"` and see rolling update
-- Toggle health check and see marathon will replace the task
+- CLI: `dcos task log $taskId`
+- CLI: `dcos marathon app update chuck-jocke/service instances=20`
+- Service UI: Change `"SERVICE_VERSION":"4"` and see rolling update
+- Toggle health check `curl -XPUT your.public.elb.amazonaws.com/health and see marathon will replace the task
 
 
