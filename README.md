@@ -13,7 +13,7 @@ In the era of docker, big data and microservices it is really important to distr
 
 # Talk
 
-To see the presentation, just open the pdf file in the presentation folder or go to https://speakerdeck.com/unterstein/dcos-for-java-devs
+To see the presentation, just open the pdf file in the presentation folder or go to https://speakerdeck.com/unterstein/dcos-for-java-devs-jughh
 
 # What is in this demo?
 - One java service, one mysql database
