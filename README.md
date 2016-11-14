@@ -1,15 +1,15 @@
 # Abstract
 ## Deutsch
-Containerorchestrierung mit Mesos – DC/OS für Java-Entwickler
+Containerorchestrierung mit Apache Mesos – DC/OS für Java-Entwickler
 
-In Zeiten von Docker, Big Data und Microservices wird es immer wichtiger, seine verteilte Anwendung sinnvoll auf sein Cluster zu verteilen und dabei trotzdem noch den Überblick zu behalten. Daher werden Plattformprodukte bzw. Cluster-Management-Systeme wie Kubernetes oder DC/OS immer wichtiger und halten in immer mehr Bereiche Einzug. In dieser Session werden wir einen Java-basierten Service implementieren und ihn mit einer Handvoll umgebenden Services zunächst mit Docker-Compose starten. Danach werden wir sehen, wie einfach es ist, die gleiche verteilte Anwendung in DC/OS auf dem eigenen Cluster zu deployen und zu monitoren. Danach werden wir einzelne Services unabhängig von der restlichen Anwendung skalieren und im laufenden Betrieb aktualisieren. Und das Coolste dabei: Wir können uns alle Vorgänge visualisieren lassen.
+In Zeiten von Docker, Big Data und Microservices wird es immer wichtiger, seine verteilte Anwendung sinnvoll auf sein Cluster zu verteilen und dabei trotzdem noch den Überblick zu behalten. Daher werden Plattformprodukte bzw. Cluster-Management-Systeme wie Apache Mesos und DC/OS immer wichtiger und halten in immer mehr Bereiche Einzug. In dieser Session werden wir einen Java-basierten Service mit Spring Boot implementieren und zunächst lokal und dann mit Docker-Compose starten. Danach werden wir sehen, wie einfach es ist, die gleiche verteilte Anwendung in DC/OS auf dem eigenen Cluster zu deployen und zu monitoren. Danach werden wir unseren Service skalieren und im laufenden Betrieb aktualisieren. Und das Coolste dabei: Wir haben eine hübsche UI und eine super CLI.
 
 
 
 ## English
-Container orchestration on Mesos - DC/OS for java devs
+Container orchestration on Apache Mesos - DC/OS for java devs
 
-In the era of docker, big data and microservices it is really important to distribute your applications reasonable across your cluster and keep a good overview of all of your applications. Because of this, cluster management software like DC/OS are very important. In this session we will implement a java based service and will start him with docker-compose first. Then we will deploy our service to DC/OS and see how easy it is to scale, upgrade, monitor and do other fancy stuff. And the best thing for the demo: We will have a nice UI to visualize.
+In the era of docker, big data and microservices it is really important to distribute your applications reasonable across your cluster and keep a good overview of all of your applications. Because of this, cluster management software like Apache Mesos and DC/OS are very important and popular. In this session we will implement a java based service with spring boot and will start him locally and with docker-compose. Then we will deploy our service to DC/OS and see how easy it is to scale, upgrade, monitor and do other fancy stuff. And the best thing for the demo: We will have a nice UI and super cool CLI.
 
 # Talk
 
