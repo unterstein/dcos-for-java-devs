@@ -1,6 +1,7 @@
 package chuck.norris.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,8 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     private final String nodeId;
 
     // stores the application version of this service
-    private final String version;
+    @Value("${SERVICE_VERSION:1}")
+    private String version;
 
     // stores the host address on which this service runs
     private final String hostAddress;
@@ -37,12 +39,11 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     // stores the information if this service should be return healthy or unhealthy
     private boolean healthy = true;
 
+    @Value("${MYSQL_URL:jdbc:mysql://localhost:3306/chuck?user=root&password=}")
+    private String mysqlUrl;
+
     public ChuckApplication() {
         nodeId = UUID.randomUUID().toString();
-        String tmpVersion = System.getenv("SERVICE_VERSION");
-        if (tmpVersion == null)
-            tmpVersion = System.getProperty("SERVICE_VERSION", "1");
-        version = tmpVersion;
         hostAddress = getHostAddress();
     }
 
@@ -87,10 +88,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
 
     @Bean
     public DataSource dataSource() {
-        String MYSQL_URL = System.getenv("MYSQL_URL");
-        if (MYSQL_URL == null)
-            MYSQL_URL = System.getProperty("MYSQL_URL", "jdbc:mysql://localhost:3306/chuck?user=root&password=");
-        return new DriverManagerDataSource(MYSQL_URL);
+        return new DriverManagerDataSource(mysqlUrl);
     }
 
     private String getHostAddress() {
