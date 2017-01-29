@@ -8,9 +8,6 @@
          ],
          "cpus":0.25,
          "mem":1024,
-         "ports":[
-            0
-         ],
          "instances":2,
          "healthChecks":[
             {
