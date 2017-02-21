@@ -4,7 +4,7 @@ services:
   service:
     image: unterstein/dcos-for-java-devs-service
     ports:
-      - "18080:8080"
+      - "8080:8080"
     depends_on:
       - database
     environment:
@@ -13,5 +13,3 @@ services:
 
   database:
     image: unterstein/dcos-for-java-devs-database
-    ports:
-      - "13306:3306"
