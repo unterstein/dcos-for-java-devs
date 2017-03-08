@@ -23,8 +23,9 @@
          "container":{
             "type":"DOCKER",
             "docker":{
-               "image":"unterstein/dcos-for-java-devs-service:latest",
+               "image":"unterstein/dcos-for-java-devs-service",
                "network":"BRIDGE",
+               "forcePullImage":true,
                "portMappings":[
                   {
                      "hostPort":0,
@@ -55,7 +56,7 @@
          "container":{
             "type":"DOCKER",
             "docker":{
-               "image":"unterstein/dcos-for-java-devs-database:latest",
+               "image":"unterstein/dcos-for-java-devs-database",
                "network":"BRIDGE",
                "portMappings":[
                   {
