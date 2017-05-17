@@ -24,14 +24,10 @@ import java.util.*;
 @RestController("/")
 public class ChuckApplication extends WebMvcConfigurerAdapter {
 
-    private final static List<String> acceptedLanguages = Arrays.asList("de", "en");
+    private final static List<String> acceptedLanguages = Arrays.asList("en", "de");
 
     // stores the current nodeId of this service - current implemented as uuid
     private final String nodeId;
-
-    // stores the application version of this service
-    @Value("${SERVICE_VERSION:1}")
-    private String version;
 
     // stores the host address on which this service runs
     private final String hostAddress;
@@ -39,6 +35,11 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     // stores the information if this service should be return healthy or unhealthy
     private boolean healthy = true;
 
+    // stores the application version of this service
+    @Value("${SERVICE_VERSION:1}")
+    private String version;
+
+    // stores the mysql url to connect to
     @Value("${MYSQL_URL:jdbc:mysql://localhost:3306/chuck?user=root&password=&useTimezone=true&serverTimezone=Europe/Berlin}")
     private String mysqlUrl;
 
