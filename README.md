@@ -49,7 +49,7 @@ In the era of docker, big data and microservices it is really important to distr
 - CLI: `dcos task log $taskId`
 - CLI: `dcos marathon app update /chuck-jokes/service instances=20`
 - Service UI: Change `"SERVICE_VERSION":"4"` and see rolling update
-- Toggle health check `curl -XPUT your.public.elb.amazonaws.com/health` and see marathon will replace the task
+- Toggle health check `curl -XDELETE your.public.elb.amazonaws.com/health` and see marathon will replace the task
 - [Optional] Install zeppelin, import `zeppelin-analysis.json` notebook and see what happens :)
 
 

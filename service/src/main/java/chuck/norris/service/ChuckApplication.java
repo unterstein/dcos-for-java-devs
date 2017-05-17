@@ -39,7 +39,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     // stores the information if this service should be return healthy or unhealthy
     private boolean healthy = true;
 
-    @Value("${MYSQL_URL:jdbc:mysql://localhost:3306/chuck?user=root&password=}")
+    @Value("${MYSQL_URL:jdbc:mysql://localhost:3306/chuck?user=root&password=&useTimezone=true&serverTimezone=Europe/Berlin}")
     private String mysqlUrl;
 
     public ChuckApplication() {
@@ -68,18 +68,22 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     }
 
     @RequestMapping("/health")
-    public String healthy() {
+    public Map<String, String> healthy() {
         if (healthy) {
-            return "healthy";
+            Map<String, String> result = new HashMap<>();
+            result.put("status", "ok");
+            return result;
         } else {
             throw new RuntimeException("meh!");
         }
     }
 
-    @RequestMapping(value = "/health", method = RequestMethod.PUT)
-    public String toggleHealth() {
-        healthy = !healthy; // toggled value
-        return "toggled, now: " + healthy;
+    @RequestMapping(value = "/health`", method = RequestMethod.DELETE)
+    public Map<String, String> toggleHealth() {
+        healthy = false;
+        Map<String, String> result = new HashMap<>();
+        result.put("healthy", "false");
+        return result;
     }
 
     public static void main(String[] args) throws Exception {
