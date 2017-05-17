@@ -44,7 +44,7 @@
             "maximumOverCapacity":0.15
          },
          "labels":{
-            "HAPROXY_0_VHOST":"jax-demo-publicsla-imarzykrt4x0-2088725561.us-west-2.elb.amazonaws.com",
+            "HAPROXY_0_VHOST":"your.public.elb.amazonaws.com",
             "HAPROXY_GROUP":"external"
          }
       },
