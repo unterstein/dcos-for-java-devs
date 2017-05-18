@@ -1,17 +1,17 @@
 package chuck.norris.service.api;
 
 public class JokeResponse {
-  public String joke;
+  public String hostAddress;
   public String locale;
   public String nodeId;
   public String version;
-  public String hostAddres;
+  public String joke;
 
-  public JokeResponse(String joke, String locale, String nodeId, String version, String hostAddres) {
-    this.joke = joke;
+  public JokeResponse(String hostAddress, String locale, String nodeId, String version, String joke) {
+    this.hostAddress = hostAddress;
     this.locale = locale;
     this.nodeId = nodeId;
     this.version = version;
-    this.hostAddres = hostAddres;
+    this.joke = joke;
   }
 }

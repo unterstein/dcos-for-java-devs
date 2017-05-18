@@ -65,11 +65,12 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         Map<String, Object> query = template.queryForMap("SELECT * FROM `jokes` WHERE lang=? ORDER BY RAND() LIMIT 0,1;", locale);
 
         return new JokeResponse(
-            query.get("joke").toString(),
+            hostAddress,
             locale,
             nodeId,
             version,
-            hostAddress);
+            query.get("joke").toString()
+        );
     }
 
     @RequestMapping("/health")
