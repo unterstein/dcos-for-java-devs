@@ -1,5 +1,7 @@
 package chuck.norris.service;
 
+import chuck.norris.service.api.HealthResponse;
+import chuck.norris.service.api.JokeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +19,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import javax.sql.DataSource;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @EnableAutoConfiguration
 @ComponentScan
@@ -52,39 +57,34 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     JdbcTemplate template;
 
     @RequestMapping("/")
-    public Map<String, String> randomJoke() {
-        Map<String, String> result = new HashMap<>();
+    public JokeResponse randomJoke() {
         String locale = LocaleContextHolder.getLocale().getLanguage();
         if (!acceptedLanguages.contains(locale)) {
             locale = acceptedLanguages.get(0);
         }
         Map<String, Object> query = template.queryForMap("SELECT * FROM `jokes` WHERE lang=? ORDER BY RAND() LIMIT 0,1;", locale);
 
-        result.put("joke", query.get("joke").toString());
-        result.put("locale", locale);
-        result.put("nodeId", nodeId);
-        result.put("version", version);
-        result.put("hostAddress", hostAddress);
-        return result;
+        return new JokeResponse(
+            query.get("joke").toString(),
+            locale,
+            nodeId,
+            version,
+            hostAddress);
     }
 
     @RequestMapping("/health")
-    public Map<String, String> healthy() {
+    public HealthResponse healthy() {
         if (healthy) {
-            Map<String, String> result = new HashMap<>();
-            result.put("status", "ok");
-            return result;
+            return new HealthResponse(true);
         } else {
             throw new RuntimeException("meh!");
         }
     }
 
     @RequestMapping(value = "/health`", method = RequestMethod.DELETE)
-    public Map<String, String> toggleHealth() {
+    public HealthResponse toggleHealth() {
         healthy = false;
-        Map<String, String> result = new HashMap<>();
-        result.put("healthy", "false");
-        return result;
+        return new HealthResponse(false);
     }
 
     public static void main(String[] args) throws Exception {
