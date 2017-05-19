@@ -5,15 +5,12 @@ import chuck.norris.service.api.JokeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javax.sql.DataSource;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -41,11 +38,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     // stores the application version of this service
     @Value("${SERVICE_VERSION:1}")
     private String version;
-
-    // stores the mysql url to connect to
-    @Value("${MYSQL_URL:jdbc:mysql://localhost:3306/chuck?user=root&password=&useTimezone=true&serverTimezone=Europe/Berlin}")
-    private String mysqlUrl;
-
+   
     public ChuckApplication() {
         nodeId = UUID.randomUUID().toString();
         hostAddress = getHostAddress();
@@ -89,12 +82,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ChuckApplication.class, args);
     }
-
-    @Bean
-    public DataSource dataSource() {
-        return new DriverManagerDataSource(mysqlUrl);
-    }
-
+   
     private String getHostAddress() {
         try {
             return InetAddress.getLocalHost().getHostAddress();
