@@ -17,8 +17,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 
@@ -39,7 +42,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         public void setServiceVersion(String serviceVersion) {
             this.serviceVersion = serviceVersion;
         }
-    }
+    }        
     
     private final static List<String> acceptedLanguages = Arrays.asList("en", "de");
 
@@ -62,6 +65,11 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
 
     @Autowired
     JdbcTemplate template;
+    
+    @Bean
+    public HealthIndicator chucksHealthIndicator() {
+        return () -> (healthy ? Health.up() : Health.down()).build();
+    }
 
     @RequestMapping("/")
     public JokeResponse randomJoke(final Locale locale) {
@@ -78,15 +86,6 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
             chuckConfiguration.getServiceVersion(),
             query.get("joke").toString()
         );
-    }
-
-    @RequestMapping("/health")
-    public HealthResponse healthy() {
-        if (healthy) {
-            return new HealthResponse(true);
-        } else {
-            throw new RuntimeException("meh!");
-        }
     }
 
     @RequestMapping(value = "/health", method = RequestMethod.DELETE)

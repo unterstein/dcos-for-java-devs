@@ -12,7 +12,7 @@
          "healthChecks":[
             {
                "protocol":"HTTP",
-               "path":"/health",
+               "path":"/application/health",
                "portIndex":0,
                "timeoutSeconds":10,
                "gracePeriodSeconds":10,
