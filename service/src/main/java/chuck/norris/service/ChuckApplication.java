@@ -2,7 +2,6 @@ package chuck.norris.service;
 
 import chuck.norris.service.api.HealthResponse;
 import chuck.norris.service.api.JokeResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,16 +55,16 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     private boolean healthy = true;
 
     private final ChuckConfiguration chuckConfiguration;
+    
+    private final JdbcTemplate template;
    
-    public ChuckApplication(final ChuckConfiguration chuckConfiguration) {
+    public ChuckApplication(final ChuckConfiguration chuckConfiguration, final JdbcTemplate jdbcTemplate) {
         this.chuckConfiguration = chuckConfiguration;
+        this.template = jdbcTemplate;
         nodeId = UUID.randomUUID().toString();
         hostAddress = getHostAddress();
     }
 
-    @Autowired
-    JdbcTemplate template;
-    
     @Bean
     public HealthIndicator chucksHealthIndicator() {
         return () -> (healthy ? Health.up() : Health.down()).build();
