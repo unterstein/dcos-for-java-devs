@@ -3,7 +3,6 @@ package chuck.norris.service;
 import chuck.norris.service.api.HealthResponse;
 import chuck.norris.service.api.JokeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +18,29 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
 
 @SpringBootApplication
 @RestController("/")
 public class ChuckApplication extends WebMvcConfigurerAdapter {
 
+    @Component
+    @ConfigurationProperties // (prefix = "chuck") you can also prefix that stuff
+    static class ChuckConfiguration {
+        /** stores the application version of this service */
+        private String serviceVersion;
+
+        public String getServiceVersion() {
+            return serviceVersion;
+        }
+
+        public void setServiceVersion(String serviceVersion) {
+            this.serviceVersion = serviceVersion;
+        }
+    }
+    
     private final static List<String> acceptedLanguages = Arrays.asList("en", "de");
 
     // stores the current nodeId of this service - current implemented as uuid
@@ -35,11 +52,10 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     // stores the information if this service should be return healthy or unhealthy
     private boolean healthy = true;
 
-    // stores the application version of this service
-    @Value("${SERVICE_VERSION:1}")
-    private String version;
+    private final ChuckConfiguration chuckConfiguration;
    
-    public ChuckApplication() {
+    public ChuckApplication(final ChuckConfiguration chuckConfiguration) {
+        this.chuckConfiguration = chuckConfiguration;
         nodeId = UUID.randomUUID().toString();
         hostAddress = getHostAddress();
     }
@@ -59,7 +75,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
             hostAddress,
             lang,
             nodeId,
-            version,
+            chuckConfiguration.getServiceVersion(),
             query.get("joke").toString()
         );
     }
