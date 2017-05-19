@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -55,16 +55,16 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
     JdbcTemplate template;
 
     @RequestMapping("/")
-    public JokeResponse randomJoke() {
-        String locale = LocaleContextHolder.getLocale().getLanguage();
-        if (!acceptedLanguages.contains(locale)) {
-            locale = acceptedLanguages.get(0);
+    public JokeResponse randomJoke(final Locale locale) {
+        String lang = locale.getLanguage();
+        if (!acceptedLanguages.contains(lang)) {
+            lang = acceptedLanguages.get(0);
         }
-        Map<String, Object> query = template.queryForMap("SELECT * FROM `jokes` WHERE lang=? ORDER BY RAND() LIMIT 0,1;", locale);
+        Map<String, Object> query = template.queryForMap("SELECT * FROM `jokes` WHERE lang=? ORDER BY RAND() LIMIT 0,1;", lang);
 
         return new JokeResponse(
             hostAddress,
-            locale,
+            lang,
             nodeId,
             version,
             query.get("joke").toString()
