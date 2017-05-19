@@ -89,7 +89,7 @@ public class ChuckApplication extends WebMvcConfigurerAdapter {
         }
     }
 
-    @RequestMapping(value = "/health`", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/health", method = RequestMethod.DELETE)
     public HealthResponse toggleHealth() {
         healthy = false;
         return new HealthResponse(false);
