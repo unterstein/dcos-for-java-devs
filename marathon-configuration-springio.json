@@ -12,7 +12,7 @@
          "healthChecks":[
             {
                "protocol":"HTTP",
-               "path":"/health",
+               "path":"/application/health",
                "portIndex":0,
                "timeoutSeconds":10,
                "gracePeriodSeconds":10,
@@ -36,7 +36,7 @@
             }
          },
          "env":{
-            "MYSQL_URL":"jdbc:mysql://database.marathon.l4lb.thisdcos.directory:3306/chuck?user=chuck&password=norris",
+            "SPRING_DATASOURCE_URL":"jdbc:mysql://database.marathon.l4lb.thisdcos.directory:3306/chuck?user=chuck&password=norris",
             "SERVICE_VERSION": "3"
          },
          "upgradeStrategy":{
