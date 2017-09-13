@@ -25,7 +25,6 @@
             "docker":{
                "image":"unterstein/dcos-for-java-devs-service",
                "network":"BRIDGE",
-               "forcePullImage":true,
                "portMappings":[
                   {
                      "hostPort":0,
@@ -44,7 +43,7 @@
             "maximumOverCapacity":0.15
          },
          "labels":{
-            "HAPROXY_0_VHOST":"your.public.elb.amazonaws.com",
+            "HAPROXY_0_VHOST":"javazone-publicsla-dsxoeysy2rlz-165165958.us-west-2.elb.amazonaws.com",
             "HAPROXY_GROUP":"external"
          }
       },
