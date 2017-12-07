@@ -13,9 +13,11 @@ In the era of docker, big data and microservices it is really important to distr
 
 
 # Slides and recording
+![Recording](vimeo.png)
+
 - 1) Slides: [Google slides](https://docs.google.com/presentation/d/1r1IeX-FdmrkQ86fHm_sranLpvv73Ro60ShcEUD_I-L0/edit#slide=id.g18cd7b8572_4_21)
 - 2) Recording (german version): [Youtube](https://www.youtube.com/watch?v=ju56wWZHXe0)
-- 3) Recording (english version): [Youtube](https://www.youtube.com/watch?v=JM_WcsUN5fs)
+- 3) Recording (english version): [Vimeo](https://vimeo.com/233650471)
 
 
 # What is in this demo?
