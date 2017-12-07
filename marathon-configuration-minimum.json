@@ -6,7 +6,7 @@
          "dependencies":[
             "/chuck-jokes/database"
          ],
-         "cpus":0.25,
+         "cpus":1,
          "mem":1024,
          "instances":2,
          "container":{
