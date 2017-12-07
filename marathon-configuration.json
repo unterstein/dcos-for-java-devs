@@ -25,7 +25,6 @@
             "docker":{
                "image":"unterstein/dcos-for-java-devs-service",
                "network":"BRIDGE",
-               "forcePullImage":true,
                "portMappings":[
                   {
                      "hostPort":0,
@@ -36,7 +35,7 @@
             }
          },
          "env":{
-            "SPRING_DATASOURCE_URL":"jdbc:mysql://3.3.0.6:3306/chuck?user=chuck&password=norris",
+            "SPRING_DATASOURCE_URL":"jdbc:mysql://database.marathon.l4lb.thisdcos.directory:3306/chuck?user=chuck&password=norris",
             "SERVICE_VERSION": "3"
          },
          "upgradeStrategy":{
@@ -44,7 +43,7 @@
             "maximumOverCapacity":0.15
          },
          "labels":{
-            "HAPROXY_0_VHOST":"your.public.elb.amazonaws.com",
+            "HAPROXY_0_PORT":"80",
             "HAPROXY_GROUP":"external"
          }
       },
@@ -64,26 +63,12 @@
                      "containerPort":3306,
                      "protocol":"tcp",
                      "labels":{
-                        "VIP_0":"3.3.0.6:3306"
+                        "VIP_0":"database:3306",
+                        "VIP_1":"3.3.0.6:3306"
                      }
                   }
                ]
-            },
-            "volumes": [
-               {
-                 "containerPath":"mysqldata",
-                 "mode":"RW",
-                 "persistent": {
-                   "type":"root",
-                   "size":1000
-                 }
-               },
-               {
-                 "containerPath": "/var/lib/mysql",
-                 "hostPath": "mysqldata",
-                 "mode": "RW"
-               }
-            ]
+            }
          },
          "healthChecks":[
             {
