@@ -1,8 +1,8 @@
 {
-   "id":"chuck-jokes",
+   "id":"/chuck-jokes",
    "apps":[
       {
-         "id":"service",
+         "id":"/chuck-jokes/service",
          "dependencies":[
             "/chuck-jokes/database"
          ],
@@ -48,7 +48,7 @@
          }
       },
       {
-         "id":"database",
+         "id":"/chuck-jokes/database",
          "cpus":1,
          "mem":1024,
          "instances":1,
